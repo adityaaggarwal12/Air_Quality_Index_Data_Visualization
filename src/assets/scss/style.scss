@@ -28,12 +28,8 @@ File: style.css
 @import 'partials/mixins/function';
 
 // icon
-@import 'partials/font/next-icon';
 @import 'partials/font/feather';
 @import 'partials/font/fontawesome';
-@import 'partials/font/flaticon';
-@import 'partials/font/cryptofont';
-
 // important Element
 @import 'partials/menu/menu-lite';
 @import 'partials/widget/widget';
@@ -42,14 +38,11 @@ File: style.css
 @import 'partials/theme-elements/form';
 @import 'partials/theme-elements/radiobox-checkbox';
 @import 'partials/theme-elements/labels-badges';
-@import 'partials/theme-elements/data-tables';
-@import 'partials/theme-elements/authentication';
 @import 'partials/theme-elements/button';
 @import 'partials/theme-elements/breadcrumb-pagination';
 @import 'partials/theme-elements/nav';
 
 // Other
-@import 'partials/other/chat';
 @import 'partials/other/chart';
 
 
