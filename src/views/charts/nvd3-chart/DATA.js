@@ -34,9 +34,9 @@ const Information_maps = async() => {
         if(!stationToPollutants[station].includes(pollutant)){
             stationToPollutants[station].push({
                 "name" : pollutant,
-                "min" : data[i].pollutant_min,
-                "max" : data[i].pollutant_max,
-                "avg" : data[i].pollutant_avg,
+                "min" : data[i].pollutant_min !== 'NA' ? data[i].pollutant_min : 0,
+                "max" : data[i].pollutant_max !== 'NA' ? data[i].pollutant_max : 0, 
+                "avg" : data[i].pollutant_avg !== 'NA' ? data[i].pollutant_avg : 0,
 
             })
         }

@@ -23,7 +23,38 @@ let states = NaN
 let stateToCity = NaN
 let cityToStation = NaN
 let stationToPollutants = NaN
-let pollutants = NaN
+// let pollutants = NaN
+let pollutants = ['PM2.5', 'PM10', 'NO2', 'NH3', 'SO2', 'CO', 'OZONE']
+
+let data = {
+  firstStation:{
+    name: "Secretariat, Amaravati - APPCB",
+    pollutantData: {
+      name : "PM2.5",
+      min : 0,
+      max : 0,
+      avg : 0,
+    }
+  },
+  secondStation:{
+    name: "Secretariat, Amaravati - APPCB",
+    pollutantData: {
+      name : "PM2.5",
+      min : 0,
+      max : 0,
+      avg : 0,
+    }
+  },
+  thirdStation:{
+    name: "Secretariat, Amaravati - APPCB",
+    pollutantData: {
+      name : "PM2.5",
+      min : 0,
+      max : 0,
+      avg : 0,
+    }
+  },
+}
 
 // a = Information_maps()
 // states = a[0]
@@ -46,7 +77,7 @@ const Comparison = () => {
   const [thirdStationName,setThirdStationName] = useState("Select State First")
 
   // pollutant 
-  const [pollutantName,setPollutantName] = useState("Select State First")
+  const [pollutantName,setPollutantName] = useState("PM2.5")
   const [date,setDate] = useState("Today's Date")
 
   useEffect(()=>{
@@ -74,6 +105,48 @@ const Comparison = () => {
       setThirdStationName(cityToStation[stateToCity["Andhra_Pradesh"][0]][0])
 
       setDate(data[4].slice(0,10))
+
+      for (let i = 0; i < stationToPollutants[firstStationName].length; i++) {
+        if(stationToPollutants[firstStationName][i]["name"] === "PM2.5"){
+          data["firstStation"]["pollutantData"]["min"] = stationToPollutants[firstStationName][i]["min"]
+          data["firstStation"]["pollutantData"]["max"] = stationToPollutants[firstStationName][i]["max"]
+          data["firstStation"]["pollutantData"]["avg"] = stationToPollutants[firstStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[firstStationName].length - 1){
+          data["firstStation"]["pollutantData"]["min"] = 0
+          data["firstStation"]["pollutantData"]["max"] = 0
+          data["firstStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+      for (let i = 0; i < stationToPollutants[secondStationName].length; i++) {
+        if(stationToPollutants[secondStationName][i]["name"] === "PM2.5"){
+          data["secondStation"]["pollutantData"]["min"] = stationToPollutants[secondStationName][i]["min"]
+          data["secondStation"]["pollutantData"]["max"] = stationToPollutants[secondStationName][i]["max"]
+          data["secondStation"]["pollutantData"]["avg"] = stationToPollutants[secondStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[secondStationName].length - 1){
+          data["secondStation"]["pollutantData"]["min"] = 0
+          data["secondStation"]["pollutantData"]["max"] = 0
+          data["secondStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+      for (let i = 0; i < stationToPollutants[thirdStationName].length; i++) {
+        if(stationToPollutants[thirdStationName][i]["name"] === "PM2.5"){
+          data["thirdStation"]["pollutantData"]["min"] = stationToPollutants[thirdStationName][i]["min"]
+          data["thirdStation"]["pollutantData"]["max"] = stationToPollutants[thirdStationName][i]["max"]
+          data["thirdStation"]["pollutantData"]["avg"] = stationToPollutants[thirdStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[thirdStationName].length - 1){
+          data["thirdStation"]["pollutantData"]["min"] = 0
+          data["thirdStation"]["pollutantData"]["max"] = 0
+          data["thirdStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+      console.log(data)
+
       // pollutants = []
       // for (let i = 0; i < stationToPollutants[firstStationName]; i++) {
       //   let name = stationToPollutants[firstStationName]["name"]
@@ -101,40 +174,153 @@ const Comparison = () => {
     })
   },[])
 
-  const updatePollutantsArray = () =>{
-    pollutants = []
-    for (let i = 0; i < stationToPollutants[firstStationName].length; i++) {
-      let name = stationToPollutants[firstStationName][i]["name"]
-      // if(name == undefined){
-      //   console.log(stationToPollutants[firstStationName])
-      //   break
-      // }else{
-      //   console.log(name)
-      // }
-      let second = false
-      let third = false
-      for(let j = 0; j < stationToPollutants[secondStationName].length; j++){
-        if(name == stationToPollutants[secondStationName][i]["name"]){
-          // console.log(name)
-          second = true
+  // const updatePollutantsArray = () =>{
+  //   pollutants = []
+  //   for (let i = 0; i < stationToPollutants[firstStationName].length; i++) {
+  //     let name = stationToPollutants[firstStationName][i]["name"]
+  //     // if(name == undefined){
+  //     //   console.log(stationToPollutants[firstStationName])
+  //     //   break
+  //     // }else{
+  //     //   console.log(name)
+  //     // }
+  //     let second = false
+  //     let third = false
+  //     for(let j = 0; j < stationToPollutants[secondStationName].length; j++){
+  //       if(name === stationToPollutants[secondStationName][i]["name"]){
+  //         // console.log(name)
+  //         second = true
+  //         break
+  //       }
+  //     }
+  //     for(let j = 0; j < stationToPollutants[thirdStationName].length; j++){
+  //       if(name === stationToPollutants[thirdStationName][i]["name"]){
+  //         // console.log(name)
+  //         third = true
+  //         break
+  //       }
+  //     }
+  //     if(second && third){
+  //       pollutants.push(name)
+  //     }
+  //   }
+  //   // console.log(stationToPollutants[firstStationName])
+  //   // console.log(stationToPollutants[secondStationName])
+  //   // console.log(stationToPollutants[thirdStationName])
+  //   console.log(pollutants)
+  // }
+
+  const updateData = (changedData,indicator) =>{
+    // console.log(firstStationName)
+    // console.log(secondStationName)
+    // console.log(thirdStationName)
+    // console.log(pollutants)
+    // console.log(pollutantName)
+    // console.log(data)
+    // console.log(stationToPollutants)
+    // console.log(stationToPollutants[firstStationName])
+
+    if(indicator === "pollutant"){
+      for (let i = 0; i < stationToPollutants[firstStationName].length; i++) {
+        if(stationToPollutants[firstStationName][i]["name"] === changedData){
+          data["firstStation"]["pollutantData"]["name"] = changedData
+          data["firstStation"]["pollutantData"]["min"] = stationToPollutants[firstStationName][i]["min"]
+          data["firstStation"]["pollutantData"]["max"] = stationToPollutants[firstStationName][i]["max"]
+          data["firstStation"]["pollutantData"]["avg"] = stationToPollutants[firstStationName][i]["avg"]
           break
         }
-      }
-      for(let j = 0; j < stationToPollutants[thirdStationName].length; j++){
-        if(name == stationToPollutants[thirdStationName][i]["name"]){
-          // console.log(name)
-          third = true
-          break
+        if(i === stationToPollutants[firstStationName].length - 1){
+          data["firstStation"]["pollutantData"]["name"] = changedData
+          data["firstStation"]["pollutantData"]["min"] = 0
+          data["firstStation"]["pollutantData"]["max"] = 0
+          data["firstStation"]["pollutantData"]["avg"] = 0
         }
       }
-      if(second && third){
-        pollutants.push(name)
+      for (let i = 0; i < stationToPollutants[secondStationName].length; i++) {
+        if(stationToPollutants[secondStationName][i]["name"] === changedData){
+          data["secondStation"]["pollutantData"]["name"] = changedData
+          data["secondStation"]["pollutantData"]["min"] = stationToPollutants[secondStationName][i]["min"]
+          data["secondStation"]["pollutantData"]["max"] = stationToPollutants[secondStationName][i]["max"]
+          data["secondStation"]["pollutantData"]["avg"] = stationToPollutants[secondStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[secondStationName].length - 1){
+          data["secondStation"]["pollutantData"]["name"] = changedData
+          data["secondStation"]["pollutantData"]["min"] = 0
+          data["secondStation"]["pollutantData"]["max"] = 0
+          data["secondStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+      for (let i = 0; i < stationToPollutants[thirdStationName].length; i++) {
+        if(stationToPollutants[thirdStationName][i]["name"] === changedData){
+          data["thirdStation"]["pollutantData"]["name"] = changedData
+          data["thirdStation"]["pollutantData"]["min"] = stationToPollutants[thirdStationName][i]["min"]
+          data["thirdStation"]["pollutantData"]["max"] = stationToPollutants[thirdStationName][i]["max"]
+          data["thirdStation"]["pollutantData"]["avg"] = stationToPollutants[thirdStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[thirdStationName].length - 1){
+          data["thirdStation"]["pollutantData"]["name"] = changedData
+          data["thirdStation"]["pollutantData"]["min"] = 0
+          data["thirdStation"]["pollutantData"]["max"] = 0
+          data["thirdStation"]["pollutantData"]["avg"] = 0
+        }
       }
     }
-    // console.log(stationToPollutants[firstStationName])
-    // console.log(stationToPollutants[secondStationName])
-    // console.log(stationToPollutants[thirdStationName])
-    console.log(pollutants)
+    else if(indicator === "first"){
+      for (let i = 0; i < stationToPollutants[changedData].length; i++) {
+        if(stationToPollutants[firstStationName][i]["name"] === pollutantName){
+          data["firstStation"]["name"] = changedData
+          data["firstStation"]["pollutantData"]["min"] = stationToPollutants[firstStationName][i]["min"]
+          data["firstStation"]["pollutantData"]["max"] = stationToPollutants[firstStationName][i]["max"]
+          data["firstStation"]["pollutantData"]["avg"] = stationToPollutants[firstStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[changedData].length - 1){
+          data["firstStation"]["name"] = changedData
+          data["firstStation"]["pollutantData"]["min"] = 0
+          data["firstStation"]["pollutantData"]["max"] = 0
+          data["firstStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+    }
+    else if(indicator === "second"){
+      for (let i = 0; i < stationToPollutants[changedData].length; i++) {
+        if(stationToPollutants[secondStationName][i]["name"] === pollutantName){
+          data["secondStation"]["name"] = changedData
+          data["secondStation"]["pollutantData"]["min"] = stationToPollutants[secondStationName][i]["min"]
+          data["secondStation"]["pollutantData"]["max"] = stationToPollutants[secondStationName][i]["max"]
+          data["secondStation"]["pollutantData"]["avg"] = stationToPollutants[secondStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[changedData].length - 1){
+          data["secondStation"]["name"] = changedData
+          data["secondStation"]["pollutantData"]["min"] = 0
+          data["secondStation"]["pollutantData"]["max"] = 0
+          data["secondStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+    }
+    else if(indicator === "third"){
+      for (let i = 0; i < stationToPollutants[changedData].length; i++) { 
+        if(stationToPollutants[thirdStationName][i]["name"] === pollutantName){
+          data["thirdStation"]["name"] = changedData
+          data["thirdStation"]["pollutantData"]["min"] = stationToPollutants[thirdStationName][i]["min"]
+          data["thirdStation"]["pollutantData"]["max"] = stationToPollutants[thirdStationName][i]["max"]
+          data["thirdStation"]["pollutantData"]["avg"] = stationToPollutants[thirdStationName][i]["avg"]
+          break
+        }
+        if(i === stationToPollutants[changedData].length - 1){
+          data["thirdStation"]["name"] = changedData
+          data["thirdStation"]["pollutantData"]["min"] = 0
+          data["thirdStation"]["pollutantData"]["max"] = 0
+          data["thirdStation"]["pollutantData"]["avg"] = 0
+        }
+      }
+    }
+    
+
+    console.log(data)
   }
 
   //First
@@ -142,16 +328,19 @@ const Comparison = () => {
     setFirstState(event.target.value)
     setFirstCityName(stateToCity[event.target.value][0])
     setFirstStationName(cityToStation[stateToCity[event.target.value][0]][0])
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(cityToStation[stateToCity[event.target.value][0]][0],'first')
   }
   const firstCitySelectHandler = (event) =>{
     setFirstCityName(event.target.value)
     setFirstStationName(cityToStation[firstCityName][0])
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(cityToStation[firstCityName][0],'first')
   }
   const firstStationSelectHandler = (event) =>{
     setFirstStationName(event.target.value)
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(event.target.value,'first')
   }
 
   //Second
@@ -159,16 +348,19 @@ const Comparison = () => {
     setSecondState(event.target.value)
     setSecondCityName(stateToCity[event.target.value][0])
     setSecondStationName(cityToStation[stateToCity[event.target.value][0]][0])
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(cityToStation[stateToCity[event.target.value][0]][0],'second')
   }
   const secondCitySelectHandler = (event) =>{
     setSecondCityName(event.target.value)
     setSecondStationName(cityToStation[firstCityName][0])
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(cityToStation[firstCityName][0],'second')
   }
   const secondStationSelectHandler = (event) =>{
     setSecondStationName(event.target.value)
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(event.target.value,'second')
   }
 
   //Third
@@ -177,21 +369,30 @@ const Comparison = () => {
     setThirdState(event.target.value)
     setThirdCityName(stateToCity[event.target.value][0])
     setThirdStationName(cityToStation[stateToCity[event.target.value][0]][0])
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(cityToStation[stateToCity[event.target.value][0]][0],'third')
   }
   const thirdCitySelectHandler = (event) =>{
     setThirdCityName(event.target.value)
     setThirdStationName(cityToStation[firstCityName][0])
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(cityToStation[firstCityName][0],'third')
   }
   const thirdStationSelectHandler = (event) =>{
     setThirdStationName(event.target.value)
-    updatePollutantsArray()
+    // updatePollutantsArray()
+    updateData(event.target.value,'third')
   }
   //pollutant
   const pollutantSelectHandler = (event) =>{
       // console.log(event.target.value)
       setPollutantName(event.target.value)
+      updateData(event.target.value,'pollutant')
+
+      console.log(firstStationName)
+      console.log(secondStationName)
+      console.log(thirdStationName)
+      console.log(pollutantName)
   }
 
 
